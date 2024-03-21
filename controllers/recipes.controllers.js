@@ -16,19 +16,34 @@ export const addRecipe = async (req, res, next) => {
 export const getRecipes= async (req, res, next) => {
     try {
         //get all recipes from db
-        const displayRecipe = await RecipeModel.find();
+        const displayRecipes = await RecipeModel.find();
         //Return response
-        res.json(displayRecipe);
+        res.json(displayRecipes);
     }
     catch (error){
         next(error);
     }
     };
 
-    
-export const getRecipe= (req, res) => {
-    res.send('Get recipe with id');
-}
+    export const getRecipe= async (req, res, next) => {
+        try {
+            //get a recipe by id
+            const displayRecipe = await RecipeModel.findById(req.params.id);
+
+            //return 404 if not found
+            if (displayRecipe === null) {
+                res.status(404).json({
+                    message: `Recipe with ObjectId: ${req.params.id} Not Found!`
+                })
+            }
+            //Return response
+            res.json(displayRecipe);
+        }
+        catch (error){
+            next(error);
+        }
+        };
+
 
 export const patchRecipe= (req, res) => {
     res.send('Update recipe with id');
