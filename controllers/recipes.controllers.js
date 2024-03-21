@@ -13,11 +13,19 @@ export const addRecipe = async (req, res, next) => {
     };
 
 
-export const getRecipes= (req, res) => {
-    res.send('Get all recipes!');
-}
+export const getRecipes= async (req, res, next) => {
+    try {
+        //get all recipes from db
+        const displayRecipe = await RecipeModel.find();
+        //Return response
+        res.json(displayRecipe);
+    }
+    catch (error){
+        next(error);
+    }
+    };
 
-
+    
 export const getRecipe= (req, res) => {
     res.send('Get recipe with id');
 }
