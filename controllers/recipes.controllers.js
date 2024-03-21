@@ -1,11 +1,17 @@
 import {RecipeModel} from "../models/recipe.js"
 
-export const addRecipe = async (req, res) => {
-    //Add recipe to db
+export const addRecipe = async (req, res, next) => {
+    try {//Add recipe to db
     const createResult = await RecipeModel.create(req.body);
     //return Response
     res.json(createResult);
 }
+        catch (error){
+            //forward to express error handler
+            next(error);
+        }
+    };
+
 
 export const getRecipes= (req, res) => {
     res.send('Get all recipes!');
