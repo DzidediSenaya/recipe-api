@@ -3,7 +3,7 @@ import { addRecipe, getRecipe, getRecipes, patchRecipe, deleteRecipe } from "../
 import multer from "multer";
 
 //configure upload middleware
-const upload = multer({dest: 'uploads'});
+const upload = multer({dest: 'uploads/images'});
 
 
 //create recipes router
